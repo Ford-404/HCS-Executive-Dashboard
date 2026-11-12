@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<body style="margin:0;padding:24px;background:#f4f5f7;font-family:Helvetica,Arial,sans-serif;color:#1a1a1a;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:720px;margin:0 auto;background:#ffffff;border:1px solid #dde0e4;border-radius:6px;">
+<tr><td style="padding:22px 26px 6px;">
+  <div style="font-size:18px;font-weight:bold;">{{ title }}</div>
+  <div style="font-size:13px;color:#555;margin-top:4px;">Week of {{ week_of }} · {{ grand.count }} active projects</div>
+</td></tr>
+
+<tr><td style="padding:14px 26px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+    {% for label, value, delta in kpis %}
+    <td style="padding:10px 12px;border:1px solid #e3e5e8;border-radius:4px;" width="23.5%">
+      <div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.04em;">{{ label }}</div>
+      <div style="font-size:19px;font-weight:bold;margin-top:2px;">{{ value }}</div>
+      {% if delta %}<div style="font-size:11px;color:#555;margin-top:2px;">{{ delta }} vs last week</div>{% endif %}
+    </td>
+    {% if not loop.last %}<td width="2%" style="font-size:0;">&nbsp;</td>{% endif %}
+    {% endfor %}
+  </tr></table>
+</td></tr>
+
+<tr><td style="padding:4px 26px 14px;">
+  <div style="font-size:14px;font-weight:bold;margin-bottom:4px;">By owner type</div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="font-size:13px;border-collapse:collapse;">
+    <tr style="color:#555;font-size:11px;text-transform:uppercase;letter-spacing:.04em;">
+      <td style="padding:6px 4px;border-bottom:1px solid #333;">Owner type</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Projects</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Original</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Total PCCO</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Current</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Share</td>
+    </tr>
+    {% for o in owner_segments %}{% set t = o.totals %}
+    <tr>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;"><b>{{ o.label }}</b>{% if o.name and o.name != o.label %} <span style="color:#777;font-size:12px;">{{ o.name }}</span>{% endif %}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.count }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.original|short }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.total_pcco|short }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.current|short }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ '%.0f'|format(((t.current / grand.current * 100)|float) if grand.current else 0) }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
+</td></tr>
+
+<tr><td style="padding:4px 26px 10px;">
+  <div style="font-size:14px;font-weight:bold;margin-bottom:4px;">By region</div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="font-size:13px;border-collapse:collapse;">
+    <tr style="color:#555;font-size:11px;text-transform:uppercase;letter-spacing:.04em;">
+      <td style="padding:6px 4px;border-bottom:1px solid #333;">Region</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Projects</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Original</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Total PCCO</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #333;text-align:right;">Current</td>
+    </tr>
+    {% for g in groups %}{% set t = g.totals %}
+    <tr>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;">{{ g.region }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.count }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.original|short }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.total_pcco|short }}</td>
+      <td style="padding:6px 4px;border-bottom:1px solid #eceef0;text-align:right;">{{ t.current|short }}</td>
+    </tr>
+    {% endfor %}
+    <tr style="font-weight:bold;">
+      <td style="padding:7px 4px;border-top:1.5px solid #1a1a1a;">Total</td>
+      <td style="padding:7px 4px;border-top:1.5px solid #1a1a1a;text-align:right;">{{ grand.count }}</td>
+      <td style="padding:7px 4px;border-top:1.5px solid #1a1a1a;text-align:right;">{{ grand.original|short }}</td>
+      <td style="padding:7px 4px;border-top:1.5px solid #1a1a1a;text-align:right;">{{ grand.total_pcco|short }}</td>
+      <td style="padding:7px 4px;border-top:1.5px solid #1a1a1a;text-align:right;">{{ grand.current|short }}</td>
+    </tr>
+  </table>
+</td></tr>
+
+{% if changes %}
+<tr><td style="padding:8px 26px 4px;">
+  <div style="font-size:14px;font-weight:bold;margin-bottom:6px;">What changed since last week</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.55;">
+    {% for c in changes %}<li>{{ c }}</li>{% endfor %}
+  </ul>
+</td></tr>
+{% endif %}
+
+<tr><td style="padding:16px 26px 22px;font-size:12px;color:#666;">
+  The full project-level report is attached as a PDF. Source: Procore, pulled {{ generated_at }}.
+</td></tr>
+</table>
+</body>
+</html>

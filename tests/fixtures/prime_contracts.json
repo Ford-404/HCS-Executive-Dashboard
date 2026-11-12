@@ -1,0 +1,518 @@
+{
+ "562949953420000": [
+  {
+   "id": 5629499534200000,
+   "project_id": 562949953420000,
+   "title": "Schluter Prime Contract",
+   "status": "Approved",
+   "grand_total": "848897.00",
+   "contract_start_date": "2024-06-26",
+   "contract_estimated_completion_date": "2026-03-31",
+   "substantial_completion_date": null,
+   "approved_change_orders": "46067048.00"
+  }
+ ],
+ "562949953420001": [
+  {
+   "id": 5629499534200010,
+   "project_id": 562949953420001,
+   "title": "Continental Tire, IL FGWH Prime Contract",
+   "status": "Approved",
+   "grand_total": "48463989.48",
+   "contract_start_date": "2026-06-01",
+   "contract_estimated_completion_date": "2027-06-04",
+   "substantial_completion_date": null,
+   "approved_change_orders": "14577162.00",
+   "pending_change_orders": "1788033.74"
+  }
+ ],
+ "562949953420002": [
+  {
+   "id": 5629499534200020,
+   "project_id": 562949953420002,
+   "title": "Kuser Road Building 1 Prime Contract",
+   "status": "Approved",
+   "grand_total": "18175735.41",
+   "contract_start_date": "2025-09-09",
+   "contract_estimated_completion_date": "2026-09-22",
+   "substantial_completion_date": null,
+   "approved_change_orders": "976946.43"
+  }
+ ],
+ "562949953420003": [
+  {
+   "id": 5629499534200030,
+   "project_id": 562949953420003,
+   "title": "Napa Bldg. A - TikTok TI Prime Contract",
+   "status": "Approved",
+   "grand_total": "1911704.89",
+   "contract_start_date": "2026-07-23",
+   "contract_estimated_completion_date": "2026-09-30",
+   "substantial_completion_date": null,
+   "approved_change_orders": "-367049.89",
+   "pending_change_orders": "6988.00"
+  }
+ ],
+ "562949953420004": [
+  {
+   "id": 5629499534200040,
+   "project_id": 562949953420004,
+   "title": "Strykers Road Warehouse Prime Contract",
+   "status": "Approved",
+   "grand_total": "76914867.00",
+   "contract_start_date": "2026-06-01",
+   "contract_estimated_completion_date": "2027-10-04",
+   "substantial_completion_date": null,
+   "pending_change_orders": "192859.27"
+  }
+ ],
+ "562949953420005": [
+  {
+   "id": 5629499534200050,
+   "project_id": 562949953420005,
+   "title": "Legacy Park 10 Earthwork Prime Contract",
+   "status": "Approved",
+   "grand_total": "1392874.00",
+   "contract_start_date": "2026-08-25",
+   "contract_estimated_completion_date": "2026-12-01",
+   "substantial_completion_date": null,
+   "approved_change_orders": "80424.00"
+  }
+ ],
+ "562949953420006": [
+  {
+   "id": 5629499534200060,
+   "project_id": 562949953420006,
+   "title": "Medline BTS Prime Contract",
+   "status": "Approved",
+   "grand_total": "86617637.00",
+   "contract_start_date": "2025-12-04",
+   "contract_estimated_completion_date": "2027-02-04",
+   "substantial_completion_date": null,
+   "approved_change_orders": "2337267.00",
+   "pending_change_orders": "23153.00"
+  }
+ ],
+ "562949953420007": [
+  {
+   "id": 5629499534200070,
+   "project_id": 562949953420007,
+   "title": "Project 10X Prime Contract",
+   "status": "Approved",
+   "grand_total": "404274440.56",
+   "contract_start_date": "2026-04-23",
+   "contract_estimated_completion_date": "2028-03-09",
+   "substantial_completion_date": null,
+   "approved_change_orders": "-562604.80",
+   "pending_change_orders": "-5741169.00"
+  }
+ ],
+ "562949953420008": [
+  {
+   "id": 5629499534200080,
+   "project_id": 562949953420008,
+   "title": "ACN6 - Shell Prime Contract",
+   "status": "Approved",
+   "grand_total": "51636805.00",
+   "contract_start_date": "2026-05-04",
+   "contract_estimated_completion_date": "2027-07-13",
+   "substantial_completion_date": null,
+   "approved_change_orders": "9555075.82"
+  }
+ ],
+ "562949953420009": [
+  {
+   "id": 5629499534200090,
+   "project_id": 562949953420009,
+   "title": "2929 Carlisle Renovations Prime Contract",
+   "status": "Approved",
+   "grand_total": "1221167.45",
+   "contract_start_date": "2026-02-02",
+   "contract_estimated_completion_date": "2026-05-05",
+   "substantial_completion_date": null,
+   "approved_change_orders": "30428.00",
+   "pending_change_orders": "459952.42"
+  }
+ ],
+ "562949953420010": [
+  {
+   "id": 5629499534200100,
+   "project_id": 562949953420010,
+   "title": "Crossroads Logistics Park - Building 3 Prime Contract",
+   "status": "Approved",
+   "grand_total": "42983847.00",
+   "contract_start_date": "2026-10-05",
+   "contract_estimated_completion_date": "2027-10-13",
+   "substantial_completion_date": null,
+   "pending_change_orders": "-11390.00"
+  }
+ ],
+ "562949953420011": [
+  {
+   "id": 5629499534200110,
+   "project_id": 562949953420011,
+   "title": "ACN4 - Celestica TI Prime Contract",
+   "status": "Approved",
+   "grand_total": "43612996.00",
+   "contract_start_date": "2026-01-14",
+   "contract_estimated_completion_date": "2027-04-01",
+   "substantial_completion_date": null,
+   "approved_change_orders": "263890844.35"
+  }
+ ],
+ "562949953420012": [
+  {
+   "id": 5629499534200120,
+   "project_id": 562949953420012,
+   "title": "Goose Creek Phase 1 Common Prime Contract",
+   "status": "Approved",
+   "grand_total": "9116969.00",
+   "contract_start_date": "2025-12-01",
+   "contract_estimated_completion_date": "2026-10-01",
+   "substantial_completion_date": null,
+   "approved_change_orders": "0.00"
+  }
+ ],
+ "562949953420013": [
+  {
+   "id": 5629499534200130,
+   "project_id": 562949953420013,
+   "title": "I-35 & E. Marshall Road Connec Prime Contract",
+   "status": "Approved",
+   "grand_total": "0.00",
+   "contract_start_date": "2026-11-02",
+   "contract_estimated_completion_date": "2027-03-19",
+   "substantial_completion_date": null
+  }
+ ],
+ "562949953420014": [
+  {
+   "id": 5629499534200140,
+   "project_id": 562949953420014,
+   "title": "Siemens TI Westport 15 Prime Contract",
+   "status": "Approved",
+   "grand_total": "3704175.00",
+   "contract_start_date": "2026-09-04",
+   "contract_estimated_completion_date": "2026-12-04",
+   "substantial_completion_date": null,
+   "approved_change_orders": "93011.00"
+  }
+ ],
+ "562949953420015": [
+  {
+   "id": 5629499534200150,
+   "project_id": 562949953420015,
+   "title": "I-83 Commerce Center Prime Contract",
+   "status": "Approved",
+   "grand_total": "38741134.83",
+   "contract_start_date": "2026-03-02",
+   "contract_estimated_completion_date": "2027-05-07",
+   "substantial_completion_date": null,
+   "approved_change_orders": "-296745.26",
+   "pending_change_orders": "0.00"
+  }
+ ],
+ "562949953420016": [
+  {
+   "id": 5629499534200160,
+   "project_id": 562949953420016,
+   "title": "WP24 - Steel Dragon TI Prime Contract",
+   "status": "Approved",
+   "grand_total": "34391092.00",
+   "contract_start_date": "2026-02-09",
+   "contract_estimated_completion_date": "2026-08-17",
+   "substantial_completion_date": null,
+   "approved_change_orders": "727742.00"
+  }
+ ],
+ "562949953420017": [
+  {
+   "id": 5629499534200170,
+   "project_id": 562949953420017,
+   "title": "Alliance Gateway 34 - Mach TI Prime Contract",
+   "status": "Approved",
+   "grand_total": "1709064.00",
+   "contract_start_date": "2026-07-14",
+   "contract_estimated_completion_date": "2026-12-22",
+   "substantial_completion_date": null,
+   "approved_change_orders": "5927575.00"
+  }
+ ],
+ "562949953420018": [
+  {
+   "id": 5629499534200180,
+   "project_id": 562949953420018,
+   "title": "Project Aero Prime Contract",
+   "status": "Approved",
+   "grand_total": "12436682.00",
+   "contract_start_date": "2025-04-23",
+   "contract_estimated_completion_date": "2026-08-25",
+   "substantial_completion_date": null,
+   "approved_change_orders": "1498664.99",
+   "pending_change_orders": "-5329.88"
+  }
+ ],
+ "562949953420019": [
+  {
+   "id": 5629499534200190,
+   "project_id": 562949953420019,
+   "title": "Riverview Business Center – Bu Prime Contract",
+   "status": "Approved",
+   "grand_total": "103500.00",
+   "contract_start_date": "2026-04-06",
+   "contract_estimated_completion_date": "2027-06-04",
+   "substantial_completion_date": null,
+   "approved_change_orders": "65261553.00",
+   "pending_change_orders": "342846.00"
+  }
+ ],
+ "562949953420020": [
+  {
+   "id": 5629499534200200,
+   "project_id": 562949953420020,
+   "title": "Westport 12 - Shell Prime Contract",
+   "status": "Approved",
+   "grand_total": "47897697.00",
+   "contract_start_date": "2026-02-23",
+   "contract_estimated_completion_date": "2027-04-21",
+   "substantial_completion_date": null,
+   "approved_change_orders": "3114894.00"
+  }
+ ],
+ "562949953420021": [
+  {
+   "id": 5629499534200210,
+   "project_id": 562949953420021,
+   "title": "Goose Creek Phase 1, Bldg 1 Prime Contract",
+   "status": "Approved",
+   "grand_total": "21563656.00",
+   "contract_start_date": "2025-12-01",
+   "contract_estimated_completion_date": "2026-10-01",
+   "substantial_completion_date": null,
+   "approved_change_orders": "0.00"
+  }
+ ],
+ "562949953420022": [
+  {
+   "id": 5629499534200220,
+   "project_id": 562949953420022,
+   "title": "Lone Oak 85 Bldg 2 Prime Contract",
+   "status": "Approved",
+   "grand_total": "64638284.00",
+   "contract_start_date": "2026-08-17",
+   "contract_estimated_completion_date": "2027-09-24",
+   "substantial_completion_date": "2027-09-24"
+  }
+ ],
+ "562949953420023": [
+  {
+   "id": 5629499534200230,
+   "project_id": 562949953420023,
+   "title": "Alliance Gateway 71 - Shell Prime Contract",
+   "status": "Approved",
+   "grand_total": "26250598.00",
+   "contract_start_date": "2026-01-30",
+   "contract_estimated_completion_date": "2027-01-21",
+   "substantial_completion_date": null,
+   "approved_change_orders": "431165.00"
+  }
+ ],
+ "562949953420024": [
+  {
+   "id": 5629499534200240,
+   "project_id": 562949953420024,
+   "title": "SCC II - Infrastructure Prime Contract",
+   "status": "Approved",
+   "grand_total": "10537622.00",
+   "contract_start_date": "2023-10-13",
+   "contract_estimated_completion_date": "2026-05-29",
+   "substantial_completion_date": null,
+   "approved_change_orders": "75213573.50"
+  }
+ ],
+ "562949953420025": [
+  {
+   "id": 5629499534200250,
+   "project_id": 562949953420025,
+   "title": "Jackson 75 Bld 300-Seoyon BTS Prime Contract",
+   "status": "Approved",
+   "grand_total": "20369504.00",
+   "contract_start_date": "2026-01-12",
+   "contract_estimated_completion_date": "2026-11-05",
+   "substantial_completion_date": "2026-12-08",
+   "approved_change_orders": "4250531.82"
+  }
+ ],
+ "562949953420026": [
+  {
+   "id": 5629499534200260,
+   "project_id": 562949953420026,
+   "title": "Project Venture Prime Contract",
+   "status": "Approved",
+   "grand_total": "190607962.00",
+   "contract_start_date": "2025-09-16",
+   "contract_estimated_completion_date": "2027-02-23",
+   "substantial_completion_date": null,
+   "approved_change_orders": "32712298.79",
+   "pending_change_orders": "4608454.00"
+  }
+ ],
+ "562949953420027": [
+  {
+   "id": 5629499534200270,
+   "project_id": 562949953420027,
+   "title": "Park 275 Development - Hillman Prime Contract",
+   "status": "Approved",
+   "grand_total": "45838140.00",
+   "contract_start_date": "2026-01-19",
+   "contract_estimated_completion_date": "2027-05-05",
+   "substantial_completion_date": null,
+   "approved_change_orders": "7300148.00",
+   "pending_change_orders": "551340.00"
+  }
+ ],
+ "562949953420028": [
+  {
+   "id": 5629499534200280,
+   "project_id": 562949953420028,
+   "title": "Westport 16 - Shell Prime Contract",
+   "status": "Approved",
+   "grand_total": "49473904.00",
+   "contract_start_date": "2026-06-22",
+   "contract_estimated_completion_date": "2027-07-08",
+   "substantial_completion_date": null,
+   "pending_change_orders": "2318027.00"
+  }
+ ],
+ "562949953420029": [
+  {
+   "id": 5629499534200290,
+   "project_id": 562949953420029,
+   "title": "I-83 Commerce Center HOP & Off Prime Contract",
+   "status": "Approved",
+   "grand_total": "1575723.00",
+   "contract_start_date": "2026-07-03",
+   "contract_estimated_completion_date": "2027-05-07",
+   "substantial_completion_date": null,
+   "pending_change_orders": "0.00"
+  }
+ ],
+ "562949953420030": [
+  {
+   "id": 5629499534200300,
+   "project_id": 562949953420030,
+   "title": "Goose Creek Phase 1, Bldg 2 Prime Contract",
+   "status": "Approved",
+   "grand_total": "19224759.00",
+   "contract_start_date": "2025-12-01",
+   "contract_estimated_completion_date": "2026-09-02",
+   "substantial_completion_date": null,
+   "approved_change_orders": "0.00"
+  }
+ ],
+ "562949953420031": [
+  {
+   "id": 5629499534200310,
+   "project_id": 562949953420031,
+   "title": "Alliance Gateway 70 - Shell Prime Contract",
+   "status": "Approved",
+   "grand_total": "17398238.00",
+   "contract_start_date": "2026-03-05",
+   "contract_estimated_completion_date": "2026-10-19",
+   "substantial_completion_date": null,
+   "approved_change_orders": "877771.00",
+   "pending_change_orders": "0.00"
+  }
+ ],
+ "562949953420032": [
+  {
+   "id": 5629499534200320,
+   "project_id": 562949953420032,
+   "title": "Westport 15 - Shell Prime Contract",
+   "status": "Approved",
+   "grand_total": "35478985.00",
+   "contract_start_date": "2025-09-15",
+   "contract_estimated_completion_date": "2026-10-23",
+   "substantial_completion_date": null,
+   "approved_change_orders": "-181773.00"
+  }
+ ],
+ "562949953420033": [
+  {
+   "id": 5629499534200330,
+   "project_id": 562949953420033,
+   "title": "AATC Vertical TI Prime Contract",
+   "status": "Approved",
+   "grand_total": "1096429.00",
+   "contract_start_date": "2026-08-03",
+   "contract_estimated_completion_date": "2026-12-11",
+   "substantial_completion_date": null,
+   "approved_change_orders": "139544.00"
+  }
+ ],
+ "562949953420034": [
+  {
+   "id": 5629499534200340,
+   "project_id": 562949953420034,
+   "title": "Lyons Magnus TI Prime Contract",
+   "status": "Approved",
+   "grand_total": "616681.00",
+   "contract_start_date": "2026-08-17",
+   "contract_estimated_completion_date": "2026-11-16",
+   "substantial_completion_date": null,
+   "approved_change_orders": "1635198.00"
+  }
+ ],
+ "562949953420035": [
+  {
+   "id": 5629499534200350,
+   "project_id": 562949953420035,
+   "title": "Ranger 35 Commerce Center Bldg 1 Prime Contract",
+   "status": "Approved",
+   "grand_total": "58261881.00",
+   "contract_start_date": "2026-09-03",
+   "contract_estimated_completion_date": "2027-09-09",
+   "substantial_completion_date": null
+  }
+ ],
+ "562949953420036": [
+  {
+   "id": 5629499534200360,
+   "project_id": 562949953420036,
+   "title": "Marshall Trade Center-Bldg 100 Prime Contract",
+   "status": "Approved",
+   "grand_total": "55772786.00",
+   "contract_start_date": "2026-04-30",
+   "contract_estimated_completion_date": "2027-04-12",
+   "substantial_completion_date": "2027-04-13",
+   "approved_change_orders": "1543423.00"
+  }
+ ],
+ "562949953420037": [
+  {
+   "id": 5629499534200370,
+   "project_id": 562949953420037,
+   "title": "Alliance Embraer MRO Prime Contract",
+   "status": "Approved",
+   "grand_total": "55709467.00",
+   "contract_start_date": "2026-03-04",
+   "contract_estimated_completion_date": "2027-04-07",
+   "substantial_completion_date": null,
+   "approved_change_orders": "0.00",
+   "pending_change_orders": "0.00"
+  }
+ ],
+ "562949953420038": [
+  {
+   "id": 5629499534200380,
+   "project_id": 562949953420038,
+   "title": "Project Flywheel Prime Contract",
+   "status": "Approved",
+   "grand_total": "173862800.00",
+   "contract_start_date": "2025-07-07",
+   "contract_estimated_completion_date": "2027-05-31",
+   "substantial_completion_date": null,
+   "approved_change_orders": "12872052.53"
+  }
+ ]
+}

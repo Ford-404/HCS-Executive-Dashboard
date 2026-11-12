@@ -1,0 +1,548 @@
+[
+ {
+  "id": 562949953420000,
+  "name": "Schluter",
+  "active": true,
+  "square_feet": 124839,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Third Party"
+  }
+ },
+ {
+  "id": 562949953420001,
+  "name": "Continental Tire, IL FGWH",
+  "active": true,
+  "square_feet": 338000,
+  "project_region": {
+   "id": 122,
+   "name": "HCS CALIFORNIA"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Third Party"
+  }
+ },
+ {
+  "id": 562949953420002,
+  "name": "Kuser Road Building 1",
+  "active": true,
+  "square_feet": 220777,
+  "project_region": {
+   "id": 130,
+   "name": "HCS NORTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420003,
+  "name": "Napa Bldg. A - TikTok TI",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 122,
+   "name": "HCS CALIFORNIA"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420004,
+  "name": "Strykers Road Warehouse",
+  "active": true,
+  "square_feet": 877628,
+  "project_region": {
+   "id": 130,
+   "name": "HCS NORTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420005,
+  "name": "Legacy Park 10 Earthwork",
+  "active": true,
+  "square_feet": 1149120,
+  "project_region": {
+   "id": 106,
+   "name": "HCS MIDSOUTH"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420006,
+  "name": "Medline BTS",
+  "active": true,
+  "square_feet": 1219164,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420007,
+  "name": "Project 10X",
+  "active": true,
+  "square_feet": 1529444,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Third Party"
+  }
+ },
+ {
+  "id": 562949953420008,
+  "name": "ACN6 - Shell",
+  "active": true,
+  "square_feet": 1009280,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420009,
+  "name": "2929 Carlisle Renovations",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420010,
+  "name": "Crossroads Logistics Park - Building 3",
+  "active": true,
+  "square_feet": 1008328,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420011,
+  "name": "ACN4 - Celestica TI",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420012,
+  "name": "Goose Creek Phase 1 Common",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420013,
+  "name": "I-35 & E. Marshall Road Connec",
+  "active": true,
+  "square_feet": 47915,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420014,
+  "name": "Siemens TI Westport 15",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420015,
+  "name": "I-83 Commerce Center",
+  "active": true,
+  "square_feet": 611000,
+  "project_region": {
+   "id": 130,
+   "name": "HCS NORTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420016,
+  "name": "WP24 - Steel Dragon TI",
+  "active": true,
+  "square_feet": 1148942,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420017,
+  "name": "Alliance Gateway 34 - Mach TI",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420018,
+  "name": "Project Aero",
+  "active": true,
+  "square_feet": 47993,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Third Party"
+  }
+ },
+ {
+  "id": 562949953420019,
+  "name": "Riverview Business Center – Bu",
+  "active": true,
+  "square_feet": 1041600,
+  "project_region": {
+   "id": 128,
+   "name": "HCS SOUTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420020,
+  "name": "Westport 12 - Shell",
+  "active": true,
+  "square_feet": 1219034,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420021,
+  "name": "Goose Creek Phase 1, Bldg 1",
+  "active": true,
+  "square_feet": 415460,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420022,
+  "name": "Lone Oak 85 Bldg 2",
+  "active": true,
+  "square_feet": 1213200,
+  "project_region": {
+   "id": 128,
+   "name": "HCS SOUTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420023,
+  "name": "Alliance Gateway 71 - Shell",
+  "active": true,
+  "square_feet": 501235,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420024,
+  "name": "SCC II - Infrastructure",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 122,
+   "name": "HCS CALIFORNIA"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420025,
+  "name": "Jackson 75 Bld 300-Seoyon BTS",
+  "active": true,
+  "square_feet": 242923,
+  "project_region": {
+   "id": 128,
+   "name": "HCS SOUTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420026,
+  "name": "Project Venture",
+  "active": true,
+  "square_feet": 2111200,
+  "project_region": {
+   "id": 106,
+   "name": "HCS MIDSOUTH"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420027,
+  "name": "Park 275 Development - Hillman",
+  "active": true,
+  "square_feet": 715904,
+  "project_region": {
+   "id": 106,
+   "name": "HCS MIDSOUTH"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420028,
+  "name": "Westport 16 - Shell",
+  "active": true,
+  "square_feet": 1214965,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420029,
+  "name": "I-83 Commerce Center HOP & Off",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 130,
+   "name": "HCS NORTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420030,
+  "name": "Goose Creek Phase 1, Bldg 2",
+  "active": true,
+  "square_feet": 357480,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420031,
+  "name": "Alliance Gateway 70 - Shell",
+  "active": true,
+  "square_feet": 268623,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420032,
+  "name": "Westport 15 - Shell",
+  "active": true,
+  "square_feet": 798494,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420033,
+  "name": "AATC Vertical TI",
+  "active": true,
+  "square_feet": 45000,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Properties - Alliance"
+  }
+ },
+ {
+  "id": 562949953420034,
+  "name": "Lyons Magnus TI",
+  "active": true,
+  "square_feet": null,
+  "project_region": {
+   "id": 106,
+   "name": "HCS MIDSOUTH"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420035,
+  "name": "Ranger 35 Commerce Center Bldg 1",
+  "active": true,
+  "square_feet": 1233014,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420036,
+  "name": "Marshall Trade Center-Bldg 100",
+  "active": true,
+  "square_feet": 1149120,
+  "project_region": {
+   "id": 106,
+   "name": "HCS MIDSOUTH"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ },
+ {
+  "id": 562949953420037,
+  "name": "Alliance Embraer MRO",
+  "active": true,
+  "square_feet": 163750,
+  "project_region": {
+   "id": 101,
+   "name": "HCS TEXAS"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Third Party"
+  }
+ },
+ {
+  "id": 562949953420038,
+  "name": "Project Flywheel",
+  "active": true,
+  "square_feet": 2003640,
+  "project_region": {
+   "id": 130,
+   "name": "HCS NORTHEAST"
+  },
+  "project_owner_type": {
+   "id": 1,
+   "name": "Hillwood Investment Properties"
+  }
+ }
+]

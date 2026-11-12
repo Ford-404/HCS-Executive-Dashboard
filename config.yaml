@@ -1,0 +1,75 @@
+# National Active Project Summary: weekly executive report
+# Secrets (Procore client secret, SMTP/Graph credentials) come from environment
+# variables. See .env.example. Nothing secret belongs in this file.
+
+procore:
+  company_id: 0000000            # Procore company ID (or set PROCORE_COMPANY_ID)
+  environment: production        # or "sandbox" while testing
+  # Prime contracts endpoint. Procore is moving prime contracts to v2.0. If v1.0
+  # returns nothing for your company, try:
+  #   /rest/v2.0/companies/{company_id}/projects/{project_id}/prime_contracts
+  prime_contract_path: /rest/v1.0/prime_contract?project_id={project_id}
+
+# Set true if Square Footage / Owner Type only show up in the single-project
+# endpoint (run `python -m report --inspect` to check). Adds one call per project.
+fetch_project_detail: false
+
+filters:
+  status: Active
+  # The Procore report you exported was filtered by "Project > Name". If it is a
+  # hand-picked list, put those names here. Otherwise leave it empty and every
+  # active project is included.
+  include_names: []
+  exclude_names: []
+  include_regions: []            # e.g. ["HCS TEXAS", "HCS MIDSOUTH"]
+  exclude_regions: []
+  include_stages: []             # e.g. ["Course of Construction"]
+
+# Where each column comes from in the API JSON. Each entry is a list of candidate
+# paths; the first one that has a value wins. Custom fields can be referenced as
+# custom_fields.<field key, label, or id>.
+field_map:
+  region:       [project_region.name, region]
+  square_feet:  [square_feet, custom_fields.square_footage]
+  owner_type:   [project_owner_type.name, owner_type.name, owner_type, custom_fields.owner_type]
+  original:     [grand_total, original_contract_amount]
+  approved:     [approved_change_orders, approved_change_orders_amount]
+  pending:      [pending_change_orders, pending_change_orders_amount]
+  start_date:             [contract_start_date, start_date]
+  est_completion:         [contract_estimated_completion_date, estimated_completion_date]
+  substantial_completion: [substantial_completion_date]
+
+# Owner-type roll-ups (summary page, in-region subtotals, email). "match" lists
+# the Owner Type values exactly as they appear in Procore. Order here = display order.
+owner_type_groups:
+  - label: HIP
+    name: Hillwood Investment Properties
+    match: [Hillwood Investment Properties]
+  - label: Properties
+    name: Hillwood Properties - Alliance
+    match: [Hillwood Properties - Alliance]
+  - label: Third Party
+    name: Third Party
+    match: [Third Party]
+
+report:
+  title: National Active Project Summary
+  filename: National_Active_Project_Summary
+  timezone: America/Chicago
+  company_lines:
+    - Hillwood Construction Services, L.P.
+    - 3000 Turtle Creek Boulevard
+    - Dallas, Texas 75219
+  footer: "Source: Procore · Confidential"
+
+email:
+  backend: smtp                  # "smtp" or "graph" (Microsoft 365)
+  from: reports@example.com
+  to:
+    - exec1@example.com
+  cc: []
+  subject: "National Active Project Summary – Week of {date}"
+
+# Last week's numbers are kept here for the "what changed" section. On GitHub
+# Actions this directory is persisted between runs with the cache action.
+snapshot_dir: out/snapshots

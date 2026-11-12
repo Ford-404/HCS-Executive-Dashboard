@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<style>
+  @page {
+    size: letter landscape;
+    margin: 0.45in 0.4in 0.55in;
+    @bottom-left { content: "{{ footer_left }}"; font: 7pt Helvetica, Arial, sans-serif; color: #666; }
+    @bottom-center { content: "Generated {{ generated_at }}"; font: 7pt Helvetica, Arial, sans-serif; color: #666; }
+    @bottom-right { content: "Page " counter(page) " / " counter(pages); font: 7pt Helvetica, Arial, sans-serif; color: #666; }
+  }
+  body { font: 7.1pt Helvetica, Arial, sans-serif; color: #1a1a1a; margin: 0; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  h1 { font-size: 13pt; margin: 0 0 2px; }
+  .sub { color: #555; font-size: 8pt; }
+  .company { text-align: right; font-size: 7.5pt; line-height: 1.35; color: #333; }
+  .company b { font-size: 8.5pt; color: #1a1a1a; }
+
+  .kpis { display: flex; gap: 8px; margin: 6px 0 10px; }
+  .kpi { flex: 1; border: 1px solid #d6d9de; border-radius: 4px; padding: 5px 8px; }
+  .kpi .l { font-size: 6.5pt; text-transform: uppercase; letter-spacing: .04em; color: #666; }
+  .kpi .v { font-size: 11pt; font-weight: bold; margin-top: 1px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead { display: table-header-group; }
+  th { font-size: 6.6pt; font-weight: bold; color: #333; text-align: left; vertical-align: bottom;
+       padding: 3px 4px; border-bottom: 1.2px solid #333; }
+  th.grp { text-align: center; font-weight: normal; color: #666; border-bottom: 1px solid #c8ccd2; }
+  th.blank { border-bottom: none; }
+  td { padding: 3.2px 4px; border-bottom: 0.5px solid #e3e5e8; white-space: nowrap; }
+  td.name { white-space: normal; }
+  td.owner { white-space: nowrap; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  th.num { text-align: right; }
+  .neg { color: #a1241b; }
+  tr.region td { background: #eef1f5; font-weight: bold; padding-top: 5px; border-bottom: 1px solid #c8ccd2; }
+  tr.subtotal td { font-weight: bold; border-top: 1px solid #888; border-bottom: none; padding-bottom: 8px; }
+  tr.grand td { font-weight: bold; font-size: 7.8pt; border-top: 1.5px solid #1a1a1a; border-bottom: 1.5px solid #1a1a1a; padding: 5px 4px; }
+  tr.seg td { font-style: italic; color: #333; border-top: 0.5px solid #b5bac1; border-bottom: none; padding-bottom: 5px; }
+  tr { page-break-inside: avoid; }
+
+  h2 { font-size: 9.5pt; margin: 14px 0 5px; }
+  .note { color: #666; font-size: 6.8pt; margin-top: 3px; }
+  table.summary td, table.summary th { font-size: 8pt; padding: 4.5px 6px; }
+  table.summary th { font-size: 7pt; }
+  table.summary td.lbl { font-weight: bold; }
+  table.summary td.full { color: #555; }
+  table.summary tr.grand td { font-size: 8.4pt; }
+  .cnt { color: #777; font-size: 6.8pt; }
+  .bar { display: inline-block; height: 6px; background: #4a6fa5; border-radius: 1px; vertical-align: middle; margin-right: 4px; }
+  .detail { page-break-before: always; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>{{ title }}</h1>
+    <div class="sub">{{ grand.count }} active projects · data as of {{ generated_at }}</div>
+  </div>
+  <div class="company">{% for line in company_lines %}{% if loop.first %}<b>{{ line }}</b>{% else %}{{ line }}{% endif %}<br>{% endfor %}</div>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">Original contract</div><div class="v">{{ grand.original|short }}</div></div>
+  <div class="kpi"><div class="l">Approved PCCOs</div><div class="v">{{ grand.approved|short }}</div></div>
+  <div class="kpi"><div class="l">Pending PCCOs</div><div class="v">{{ grand.pending|short }}</div></div>
+  <div class="kpi"><div class="l">Current contract</div><div class="v">{{ grand.current|short }}</div></div>
+  <div class="kpi"><div class="l">Square footage</div><div class="v">{{ "{:,}".format(grand.square_feet) }}</div></div>
+</div>
+
+<h2>Totals by Owner Type</h2>
+<table class="summary">
+  <thead><tr>
+    <th>Owner Type</th><th></th><th class="num">Projects</th><th class="num">Square Footage</th>
+    <th class="num">Original Contract</th><th class="num">Approved PCCOs</th><th class="num">Pending PCCOs</th>
+    <th class="num">Total PCCO</th><th class="num">Current Contract</th><th>Share of Current</th>
+  </tr></thead>
+  <tbody>
+  {% for s in owner_segments %}{% set t = s.totals %}
+    <tr>
+      <td class="lbl">{{ s.label }}</td><td class="full">{{ s.name }}</td>
+      <td class="num">{{ t.count }}</td><td class="num">{{ t.square_feet|sqft }}</td>
+      <td class="num">{{ t.original|usd }}</td><td class="num">{{ t.approved|usd }}</td>
+      <td class="num">{{ t.pending|usd }}</td><td class="num">{{ t.total_pcco|usd }}</td>
+      <td class="num">{{ t.current|usd }}</td>
+      <td>{% set pct = ((t.current / grand.current * 100)|float) if grand.current else 0 %}<span class="bar" style="width: {{ '%.0f'|format(pct * 0.9) }}px"></span>{{ '%.1f'|format(pct) }}%</td>
+    </tr>
+  {% endfor %}
+    <tr class="grand">
+      <td>Total</td><td></td><td class="num">{{ grand.count }}</td><td class="num">{{ grand.square_feet|sqft }}</td>
+      <td class="num">{{ grand.original|usd }}</td><td class="num">{{ grand.approved|usd }}</td>
+      <td class="num">{{ grand.pending|usd }}</td><td class="num">{{ grand.total_pcco|usd }}</td>
+      <td class="num">{{ grand.current|usd }}</td><td>100%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Current Contract Amount by Region and Owner Type</h2>
+<table class="summary">
+  <thead><tr>
+    <th>Region</th>
+    {% for s in owner_segments %}<th class="num">{{ s.label }}</th>{% endfor %}
+    <th class="num">Region Total</th>
+  </tr></thead>
+  <tbody>
+  {% for g in groups %}{% set segs = matrix[g.region] %}
+    <tr>
+      <td class="lbl">{{ g.region }}</td>
+      {% for s in owner_segments %}{% set c = segs.get(s.label) %}
+      <td class="num">{% if c %}{{ c.current|usd }} <span class="cnt">({{ c.count }})</span>{% else %}<span class="cnt">–</span>{% endif %}</td>
+      {% endfor %}
+      <td class="num"><b>{{ g.totals.current|usd }}</b> <span class="cnt">({{ g.totals.count }})</span></td>
+    </tr>
+  {% endfor %}
+    <tr class="grand">
+      <td>Total</td>
+      {% for s in owner_segments %}<td class="num">{{ s.totals.current|usd }} <span class="cnt">({{ s.totals.count }})</span></td>{% endfor %}
+      <td class="num">{{ grand.current|usd }} <span class="cnt">({{ grand.count }})</span></td>
+    </tr>
+  </tbody>
+</table>
+<div class="note">Project counts in parentheses. Current Contract = Original Contract + Approved + Pending PCCOs.</div>
+
+<div class="detail">
+<h2 style="margin-top:0">Project Detail</h2>
+<table>
+  <thead>
+    <tr>
+      <th class="grp" colspan="3">Project</th>
+      <th class="grp">Prime Contract</th>
+      <th class="grp" colspan="2">PCCO Line Items</th>
+      <th class="grp" colspan="2">Calculated</th>
+      <th class="grp" colspan="3">Prime Contract Dates</th>
+    </tr>
+    <tr>
+      <th>Name</th><th class="num">Square Footage</th><th>Owner Type</th>
+      <th class="num">Original Contract Amount</th>
+      <th class="num">Approved Amount</th><th class="num">Pending All Amount</th>
+      <th class="num">Total PCCO Amount</th><th class="num">Current Contract Amount</th>
+      <th>Start Date</th><th>Estimated Completion</th><th>Substantial Completion</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for g in groups %}
+    <tr class="region"><td colspan="11">Region: {{ g.region }}</td></tr>
+    {% set segs = g.segments(config) %}
+    {% for seg in segs %}
+    {% for r in seg.rows %}
+    <tr>
+      <td class="name">{{ r.name }}</td>
+      <td class="num">{{ r.square_feet|sqft }}</td>
+      <td class="owner">{{ r.owner_type or "" }}</td>
+      <td class="num">{{ r.original|usd }}</td>
+      <td class="num">{{ r.approved|usd }}</td>
+      <td class="num">{{ r.pending|usd }}</td>
+      <td class="num">{{ r.total_pcco|usd }}</td>
+      <td class="num">{{ r.current|usd }}</td>
+      <td>{{ r.start_date|mdy }}</td>
+      <td>{{ r.est_completion|mdy }}</td>
+      <td>{{ r.substantial_completion|mdy }}</td>
+    </tr>
+    {% endfor %}
+    {% if segs|length > 1 %}{% set st = seg.totals %}
+    <tr class="seg">
+      <td>{{ seg.label }} subtotal ({{ st.count }})</td>
+      <td class="num">{{ st.square_feet|sqft }}</td><td></td>
+      <td class="num">{{ st.original|usd }}</td><td class="num">{{ st.approved|usd }}</td>
+      <td class="num">{{ st.pending|usd }}</td><td class="num">{{ st.total_pcco|usd }}</td>
+      <td class="num">{{ st.current|usd }}</td><td colspan="3"></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% set t = g.totals %}
+    <tr class="subtotal">
+      <td>Subtotal ({{ g.region }})</td>
+      <td class="num">{{ t.square_feet|sqft }}</td><td></td>
+      <td class="num">{{ t.original|usd }}</td><td class="num">{{ t.approved|usd }}</td>
+      <td class="num">{{ t.pending|usd }}</td><td class="num">{{ t.total_pcco|usd }}</td>
+      <td class="num">{{ t.current|usd }}</td><td colspan="3"></td>
+    </tr>
+  {% endfor %}
+    <tr class="grand">
+      <td>Grand Totals</td>
+      <td class="num">{{ grand.square_feet|sqft }}</td><td></td>
+      <td class="num">{{ grand.original|usd }}</td><td class="num">{{ grand.approved|usd }}</td>
+      <td class="num">{{ grand.pending|usd }}</td><td class="num">{{ grand.total_pcco|usd }}</td>
+      <td class="num">{{ grand.current|usd }}</td><td colspan="3"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>
