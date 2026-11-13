@@ -1,25 +1,70 @@
 # National Active Project Summary: weekly executive report
-# Secrets (Procore client secret, SMTP/Graph credentials) come from environment
-# variables. See .env.example. Nothing secret belongs in this file.
+# Secrets (Procore client ID/secret, Graph/SMTP credentials) live in .env, which is
+# never committed. See .env.example. Nothing secret belongs in this file.
 
 procore:
-  company_id: 0000000            # Procore company ID (or set PROCORE_COMPANY_ID)
-  environment: production        # or "sandbox" while testing
-  # Prime contracts endpoint. Procore is moving prime contracts to v2.0. If v1.0
-  # returns nothing for your company, try:
+  company_id: 9593               # used only if PROCORE_COMPANY_ID is not set in .env
+  # Prime contracts endpoint. Checked live 2026-11-12: /rest/v1.0/prime_contract (singular) is 404;
+  # the two below answer but return nothing until the service account gets Prime Contracts access
+  # (see README). Try the v2.0 one if v1.0 still returns nothing after access is granted:
   #   /rest/v2.0/companies/{company_id}/projects/{project_id}/prime_contracts
-  prime_contract_path: /rest/v1.0/prime_contract?project_id={project_id}
+  prime_contract_path: /rest/v1.0/prime_contracts?project_id={project_id}
 
-# Set true if Square Footage / Owner Type only show up in the single-project
-# endpoint (run `python -m report --inspect` to check). Adds one call per project.
-fetch_project_detail: false
+# Region, Square Footage and Owner Type are only in the single-project endpoint
+# (confirmed against live Procore 2026-11-12), so this must stay true. One call per project.
+fetch_project_detail: true
+
+# Safety check: stop (and send a failure notice instead of the report) if fewer than this share
+# of the report's projects return a prime contract. Every project on the Nov 6 export had one, so a
+# low share means missing Procore permissions, not real data.
+min_contract_coverage: 0.9
 
 filters:
   status: Active
-  # The Procore report you exported was filtered by "Project > Name". If it is a
-  # hand-picked list, put those names here. Otherwise leave it empty and every
-  # active project is included.
-  include_names: []
+  # The Procore report is filtered by "Project > Name": a hand-picked list. These are the
+  # 39 projects on the Nov 6, 2026 export (Procore has 71 Active projects; nothing else
+  # separates them). Add new projects here, or empty the list to include every Active one.
+  # A listed name that is missing or no longer Active is reported in the run log.
+  include_names:
+    - "2929 Carlisle Renovations"
+    - "AATC Vertical TI"
+    - "ACN4 - Celestica TI"
+    - "ACN6 - Shell"
+    - "Alliance Embraer MRO"
+    - "Alliance Gateway 34 - Mach TI"
+    - "Alliance Gateway 70 - Shell"
+    - "Alliance Gateway 71 - Shell"
+    - "Continental Tire, IL FGWH"
+    - "Crossroads Logistics Park - Building 3"
+    - "Goose Creek Phase 1 Common"
+    - "Goose Creek Phase 1, Bldg 1"
+    - "Goose Creek Phase 1, Bldg 2"
+    - "I-35 & E. Marshall Road Connec"
+    - "I-83 Commerce Center"
+    - "I-83 Commerce Center HOP & Off"
+    - "Jackson 75 Bld 300-Seoyon BTS"
+    - "Kuser Road Building 1"
+    - "Legacy Park 10 Earthwork"
+    - "Lone Oak 85 Bldg 2"
+    - "Lyons Magnus TI"
+    - "Marshall Trade Center-Bldg 100"
+    - "Medline BTS"
+    - "Napa Bldg. A - TikTok TI"
+    - "Park 275 Development - Hillman"
+    - "Project 10X"
+    - "Project Aero"
+    - "Project Flywheel"
+    - "Project Venture"
+    - "Ranger 35 Commerce Center Bldg 1"
+    - "Riverview Business Center – Bu"
+    - "SCC II - Infrastructure"
+    - "Schluter"
+    - "Siemens TI Westport 15"
+    - "Strykers Road Warehouse"
+    - "WP24 - Steel Dragon TI"
+    - "Westport 12 - Shell"
+    - "Westport 15 - Shell"
+    - "Westport 16 - Shell"
   exclude_names: []
   include_regions: []            # e.g. ["HCS TEXAS", "HCS MIDSOUTH"]
   exclude_regions: []
@@ -61,15 +106,34 @@ report:
     - 3000 Turtle Creek Boulevard
     - Dallas, Texas 75219
   footer: "Source: Procore · Confidential"
+  pdf_engine: auto               # auto = Chrome/Edge on Windows, WeasyPrint elsewhere | browser | weasyprint
 
 email:
-  backend: smtp                  # "smtp" or "graph" (Microsoft 365)
-  from: reports@example.com
-  to:
-    - exec1@example.com
-  cc: []
+  enabled: true                  # false = build the PDF and save the email to out/<date>/ only, send nothing
+  # Same options as the Safety Scorecard. onedrive hands the email to the existing Power Automate
+  # flow "HCS Safety Report email" (docs/power-automate-flow.md); no IT changes needed.
+  # Other options: outlook (classic Outlook desktop) | graph (needs Mail.Send from IT) | smtp
+  method: onedrive
+  to:                            # executive distribution (approved 2026-11-13)
+    - Ralph.rucker@Hillwood.com
+    - Greg.edwards@hillwood.com
+    - John.shaw@hillwood.com
+    - Brian.Pierce@Hillwood.com
+  cc: ["ford.nwosu@hillwood.com"]
+  failure_to: ["ford.nwosu@hillwood.com"]   # "FAILED: ..." notices go only here, never to the execs
+  from: ""                       # graph/smtp only: sending mailbox
   subject: "National Active Project Summary – Week of {date}"
+  onedrive:
+    folder: "HCS Safety Report"  # the folder the existing flow watches (Outbox/ and Attachments/ inside it)
+    root: ""                     # blank = your work OneDrive (Windows' OneDriveCommercial setting)
+  smtp:
+    host: smtp.office365.com
+    port: 587
+    starttls: true               # SMTP_USERNAME / SMTP_PASSWORD in .env
+  graph:
+    tenant_id: ""                # or GRAPH_TENANT_ID in .env; GRAPH_CLIENT_ID / GRAPH_CLIENT_SECRET in .env
 
-# Last week's numbers are kept here for the "what changed" section. On GitHub
-# Actions this directory is persisted between runs with the cache action.
-snapshot_dir: out/snapshots
+# Last week's numbers are kept here for the "what changed" section. Keep this folder
+# on the report PC between runs (it is gitignored).
+snapshot_dir: data/snapshots
+log_dir: logs

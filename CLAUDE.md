@@ -11,6 +11,9 @@ Third Party grouping, layout), the Nov 6, 2026 totals to reconcile against, and 
 - Preview without credentials: `python -m report --fixture tests/fixtures --no-email`. Output goes to `out/`.
 - Check the API field mapping: `python -m report --inspect`.
 - Money stays `Decimal` at full precision until display. Do not round when reading from Procore.
-- Data source: the report depends only on `list_projects`, `get_project` and `list_prime_contracts`
-  (see `report/procore.py`). To reuse another project's Procore client, write an adapter with those three methods.
-- Never commit `.env` or credentials. Secrets come from environment variables / GitHub Actions secrets.
+- Data source: `ProcoreAdapter` (`report/procore.py`) wraps `report/procore_base.py`, a verbatim copy of the
+  HCS-Safety-Scorecard client. The report only uses `list_projects`, `get_project` and `list_prime_contracts`.
+- Production runs on the Safety report's Windows PC (Task Scheduler). Email goes through OneDrive and that repo's Power Automate flow.
+  Use Windows-safe code: `encoding="utf-8"` on every file read/write, and no `%-d`-style strftime flags.
+- Never commit `.env` or credentials. Secrets live in `.env` on the PC (same service account as the Safety report).
+- Don't run without `--no-email` unless you mean to send. `email.method: onedrive` writes into the real OneDrive Outbox.

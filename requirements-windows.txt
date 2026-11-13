@@ -1,0 +1,2 @@
+# Windows-only: email.method "outlook" (Outlook desktop through COM). Not needed for onedrive/graph/smtp.
+pywin32>=306

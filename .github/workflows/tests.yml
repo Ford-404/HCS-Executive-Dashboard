@@ -1,0 +1,32 @@
+name: Tests
+
+# The weekly report runs on the always-on Windows PC (scheduling/install_task.ps1), next to the
+# Safety Health Report, because email goes through OneDrive + Power Automate. This workflow only
+# checks the calculations against the Nov 6, 2026 Procore export and that the fixture report renders.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: System libraries for PDF rendering
+        run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m report --fixture tests/fixtures --no-email
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fixture-report
+          path: |
+            out/*.pdf
+            out/email_preview.html
+          retention-days: 14

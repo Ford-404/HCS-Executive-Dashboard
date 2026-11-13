@@ -210,12 +210,29 @@ def build_report(client, config: dict) -> list[Group]:
     log.info("Fetched %d projects", len(projects))
 
     rows = []
+    with_contracts = 0
     for p in projects:
+        if filters.get("include_names") and p.get("name") not in filters["include_names"]:
+            continue  # skip the detail call for projects that can't be on the report
         if config.get("fetch_project_detail"):
             p = {**p, **client.get_project(p["id"])}
         if not include_project(p, filters, fm):
             continue
-        rows.append(build_row(p, client.list_prime_contracts(p["id"]), fm))
+        contracts = client.list_prime_contracts(p["id"])
+        with_contracts += bool(contracts)
+        rows.append(build_row(p, contracts, fm))
+
+    missing = set(filters.get("include_names") or []) - {p.get("name") for p in projects}
+    for name in sorted(missing):
+        log.warning("Listed in filters.include_names but not an %s project in Procore: %s",
+                    filters.get("status", "Active"), name)
+    need = float(config.get("min_contract_coverage", 0.9))
+    if rows and with_contracts < need * len(rows):
+        raise RuntimeError(
+            f"Only {with_contracts} of {len(rows)} projects returned a prime contract (need {need:.0%}, "
+            "min_contract_coverage in config.yaml). The Procore service account most likely lacks Prime "
+            "Contracts access on the other projects. Not sending a report with missing contract amounts.")
+    log.info("%d projects on the report, %d with prime contracts", len(rows), with_contracts)
 
     groups: dict[str, Group] = {}
     for r in rows:

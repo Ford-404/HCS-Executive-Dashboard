@@ -1,76 +1,85 @@
 # HCS Executive Dashboard: National Active Project Summary
 
-This tool pulls active projects and their prime contracts from the Procore API and rebuilds the
-*National Active Project Summary* report. It renders the report as a PDF and emails it to the executive team every week. The email body gives
-a short summary: headline numbers, a roll-up by region, and what changed since last week. The full
-project-level report is attached as a PDF.
+This tool rebuilds the Procore custom report *National Active Project Summary* from the Procore API, renders it as a PDF and
+emails it to the executive team every Friday morning. The email body gives the headline numbers, owner-type and region
+roll-ups, and what changed since last week. The full project-level report is attached as a PDF.
 
 ```
-Procore API ──► build rows / region subtotals ──► PDF (WeasyPrint) ──► email (SMTP or Microsoft 365)
-                                     └──► weekly snapshot ──► "what changed since last week"
+Procore API ──► rows / region + owner-type subtotals ──► PDF (Chrome/Edge on Windows) ──► OneDrive Outbox ──► Power Automate ──► email
+                                      └──► data/snapshots ──► "what changed since last week"
 ```
 
-## 1. Procore credentials (one-time)
+It runs on the same always-on Windows PC as the **HCS Safety Health Report**
+([Ford-Tough/HCS-Safety-Scorecard](https://github.com/Ford-Tough/HCS-Safety-Scorecard)). It uses the same Procore
+service account and client (`report/procore_base.py`), the same Power Automate email flow, and the same Task Scheduler setup.
 
-1. In the [Procore Developer Portal](https://developers.procore.com), create an app and add a
-   **Developer Managed Service Account** (DMSA).
-2. A Procore company admin installs the app in **Company Admin → App Management** and gives the
-   service account read access to **Projects**, **Directory** and **Prime Contracts** on every project.
-   The report can only include projects the service account can see.
-3. Copy the client ID and secret. Your company ID is in any Procore URL (`/companies/<id>/…`).
+## 1. Procore access
 
-## 2. Try it locally
+The report uses the Safety Scorecard's service account, which appears in Procore as **HCS Technology API**. Prime contracts here are
+*private*, and private contracts are only visible to Prime Contracts **Admin** users or to users added to each contract. The app's project
+permission template is therefore Read Only everywhere except **Prime Contracts = Admin** (set Nov 12, 2026). A project only shows up if it
+uses that template. Check this when adding new projects (Company Admin → Directory → HCS Technology API → Change Template).
 
-```bash
-pip install -r requirements.txt
-cp .env.example .env    # fill in values
-set -a; . ./.env; set +a
+The report refuses to send unless at least 90% of its projects return a prime contract (`min_contract_coverage`). Otherwise it emails
+a failure notice, so execs never get a total with most contracts missing.
+
+## 2. Set up the PC (one-time)
+
+```powershell
+git clone https://github.com/Ford-Tough/HCS-Executive-Dashboard.git
+cd HCS-Executive-Dashboard
+powershell -ExecutionPolicy Bypass -File scheduling\setup_windows.ps1
 ```
 
-Preview the layout without any credentials. This uses the data from the Nov 6, 2026 export:
+This creates `.venv` and installs requirements. If `..\hcs-safety-report\.env` exists, it copies the Procore credentials
+from there. Otherwise, fill in `.env` from `.env.example`.
 
-```bash
-python -m report --fixture tests/fixtures --no-email
+Preview without credentials (data from the Nov 6, 2026 export):
+
+```powershell
+.\.venv\Scripts\python.exe -m report --fixture tests/fixtures --no-email
 ```
 
-Check that the field mapping matches your Procore setup. This dumps one project and its prime contract as raw JSON:
+Build the live report without sending it, and compare `out\*.pdf` against the Procore export:
 
-```bash
-python -m report --inspect
+```powershell
+.\.venv\Scripts\python.exe -m report --no-email
 ```
 
-Find Square Footage, Owner Type and Region in that output. If they live under different
-keys, for example a company custom field, edit `field_map` in `config.yaml`. Then build the real report without sending it:
+`python -m report --inspect` dumps one raw project and its prime contract, which helps if Procore's fields change.
 
-```bash
-python -m report --no-email
+## 3. Email
+
+Email goes through OneDrive and the Safety Health Report's Power Automate flow. You don't need a new flow. See
+[docs/power-automate-flow.md](docs/power-automate-flow.md). Set recipients in `config.yaml`:
+
+```yaml
+email:
+  to: [...]          # starts as just you; replace with the executive distribution once approved
+  cc: []
+  failure_to: []     # who gets "FAILED: ..." notices (default: email.to)
 ```
 
-Open `out/*.pdf` and `out/email_preview.html` and compare them against the PDF exported from Procore.
+Other methods (`outlook`, `graph`, `smtp`) are available via `email.method`. Every run saves the exact email to
+`out\<date>\email.html` / `.eml`.
 
-## 3. Schedule it
+## 4. Schedule it
 
-**GitHub Actions** (recommended): push this folder to a private repo and add the values from
-`.env.example` as repository secrets (Settings → Secrets and variables → Actions). The workflow
-`.github/workflows/weekly-report.yml` runs every Monday morning. You can also run it by hand from
-the Actions tab, where unchecking "send email" builds the PDF without sending it. Every week's PDF is kept as a
-build artifact for 90 days.
-
-**Any server with cron**, as an alternative (example entry: Mondays 7:00 AM):
-
-```
-0 7 * * 1  cd /opt/procore-exec-report && set -a && . ./.env && python -m report >> report.log 2>&1
+```powershell
+powershell -ExecutionPolicy Bypass -File scheduling\install_task.ps1     # Fridays 7:00 AM (PC local time)
+Start-ScheduledTask -TaskName "HCS National Active Project Summary"     # run it now
 ```
 
-## 4. Email
+The task runs as the signed-in user, because OneDrive sync needs the user session. Lock the PC rather than signing out. Logs are in
+`logs\`. Last week's numbers are kept in `data\snapshots\` for the "what changed" section.
 
-Set `email.to`, `email.cc` and `email.from` in `config.yaml`.
+GitHub Actions (`.github/workflows/tests.yml`) only runs the tests and renders the fixture report on each push.
 
-- `backend: smtp` works with SendGrid, Mailgun, Google Workspace, or Microsoft 365 when SMTP AUTH is
-  enabled on the sending mailbox.
-- `backend: graph` is for Microsoft 365 tenants that block SMTP AUTH, which Microsoft does by default. It needs an Entra ID
-  app registration with the **Mail.Send** application permission and admin consent. Use an
-  [application access policy](https://learn.microsoft.com/graph/auth-limit-mailbox-access) to limit that app to the reports mailbox.
+## Project selection
+
+The Procore report is filtered by *Project > Name*. Procore has 71 Active projects, and the report has a hand-picked 39
+(the excluded ones include overhead and fee projects). Those 39 names are in `filters.include_names` in `config.yaml`. **Add new
+projects there.** A listed name that is no longer Active is logged as a warning. Empty the list to include every Active project.
 
 ## How the columns are calculated
 
@@ -78,20 +87,21 @@ Set `email.to`, `email.cc` and `email.from` in `config.yaml`.
 |---|---|
 | Original Contract Amount | prime contract `grand_total` |
 | Approved Amount | prime contract `approved_change_orders` |
-| Pending All Amount | prime contract `pending_change_orders` |
+| Pending All Amount | prime contract `pending_change_orders_amount` |
 | Total PCCO Amount | Approved + Pending |
 | Current Contract Amount | Original + Approved + Pending. **This includes pending change orders**, matching the Procore report. |
-| Start / Est. / Substantial Completion | prime contract date fields |
+| Start / Est. / Substantial Completion | prime contract `contract_start_date`, `contract_estimated_completion_date`, `substantial_completion_date` |
+| Region / Square Footage / Owner Type | project `project_region`, `square_feet`, `project_owner_type` (single-project endpoint only) |
 
-If a project has more than one prime contract, the amounts are added together. Rows are grouped by region and sorted by owner type (HIP, Properties, Third Party), then by
-square footage (largest first). This matches the order in the Procore export.
+All of these were checked against live Procore on Nov 12, 2026. Draft change orders are not counted, which matches Procore's report.
+If a project has more than one prime contract, the amounts are added together. Rows are grouped by region and sorted by owner
+type (HIP, Properties, Third Party), then by square footage (largest first).
 
 `tests/test_report.py` checks these calculations against the totals printed on the Nov 6, 2026 Procore export.
 
 ## Owner-type totals
 
 The first page of the PDF summarizes the work by owner type: **HIP** (Hillwood Investment Properties), **Properties**
-(Hillwood Properties - Alliance) and **Third Party**. It shows full totals for each type and a region × owner-type grid.
-In the project detail, a region with more than one owner type also gets a subtotal row for each type. The email includes the same
-breakdown. The mapping lives in `owner_type_groups` in `config.yaml`. If Procore adds a new Owner Type value, add it to a
-group's `match` list. Until then it appears as its own bucket, so it is never silently dropped.
+(Hillwood Properties - Alliance) and **Third Party**. It shows full totals for each type and a region × owner-type grid. In the project
+detail, a region with more than one owner type also gets a subtotal row for each type. The mapping lives in `owner_type_groups` in
+`config.yaml`. An unmapped Owner Type gets its own bucket, so it is never silently dropped.

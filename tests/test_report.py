@@ -11,7 +11,7 @@ from report.procore import FixtureClient
 from report.render import all_rows, usd
 
 ROOT = Path(__file__).parent.parent
-CONFIG = yaml.safe_load((ROOT / "config.yaml").read_text())
+CONFIG = yaml.safe_load((ROOT / "config.yaml").read_text(encoding="utf-8"))
 
 
 def close(a, b):
@@ -78,3 +78,21 @@ def test_texas_owner_subtotals():
     tx = next(g for g in groups() if g.region == "HCS TEXAS")
     segs = {s["label"]: s["totals"]["current"] for s in tx.segments(CONFIG)}
     assert segs == {"HIP": D("241829326.87"), "Properties": D("599543859.17"), "Third Party": D("514526095.87")}
+
+
+def test_refuses_to_report_when_prime_contracts_are_missing():
+    # Live check 2026-11-12: the service account could only see prime contracts on 2 of 39 projects.
+    # The report must fail loudly rather than email execs a total that is missing most contracts.
+    import pytest
+
+    class PartialAccess(FixtureClient):
+        def list_prime_contracts(self, project_id):
+            return super().list_prime_contracts(project_id) if project_id % 10 == 0 else []
+
+    with pytest.raises(RuntimeError, match="prime contract"):
+        build_report(PartialAccess(ROOT / "tests/fixtures"), CONFIG)
+
+
+def test_include_names_pins_the_report_to_the_export():
+    assert len(CONFIG["filters"]["include_names"]) == 39
+    assert {r.name for r in all_rows(groups())} == set(CONFIG["filters"]["include_names"])
